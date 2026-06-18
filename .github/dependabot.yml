@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Swift パッケージ（SPM）の既知脆弱性・更新
+  - package-ecosystem: "swift"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # GitHub Actions: SHA 固定したアクションのハッシュ + 版コメントを自動更新する
+  # （固定による「更新が止まる」問題を解消し、鮮度を保つ）
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # JS ツールチェーン（cspell / secretlint / textlint 等）の更新
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"

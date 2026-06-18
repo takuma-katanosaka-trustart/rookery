@@ -1,0 +1,25 @@
+name: Docs Quality
+
+# JS 製ツール（cspell / secretlint / textlint）は OS 非依存なので
+# 安価な Linux ランナーで全文走査する（macOS ランナーは Swift ビルド用に温存）。
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  text-quality:
+    runs-on: ubuntu-latest
+    steps:
+      # サプライチェーン対策: タグではなくコミット SHA で固定（コメントは可読性のための版表記）
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Setup mise (node + pnpm from mise.toml)
+        uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
+      - name: Install JS tools
+        run: pnpm install --frozen-lockfile
+      - name: Secret lint
+        run: pnpm run lint:secret
+      - name: Spell check (cspell)
+        run: pnpm run lint:spell
+      - name: Japanese prose lint (textlint)
+        run: pnpm run lint:text

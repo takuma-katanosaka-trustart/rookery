@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="470" viewBox="0 0 820 470" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="820" height="470" fill="#f8fafc"/>
+
+  <!-- window frame -->
+  <g filter="url(#sh)">
+    <rect x="30" y="30" width="760" height="380" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+  </g>
+
+  <!-- title bar -->
+  <path d="M30,42 a12,12 0 0 1 12,-12 h736 a12,12 0 0 1 12,12 v26 h-760 z" fill="#f1f5f9"/>
+  <circle cx="52" cy="48" r="6" fill="#ff5f57"/>
+  <circle cx="72" cy="48" r="6" fill="#febc2e"/>
+  <circle cx="92" cy="48" r="6" fill="#28c840"/>
+  <!-- apiserver status indicator -->
+  <circle cx="600" cy="48" r="5" fill="#10b981"/>
+  <text x="614" y="52" font-size="12" fill="#475569">container-apiserver: 稼働中</text>
+  <line x1="30" y1="68" x2="790" y2="68" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Sidebar -->
+  <rect x="31" y="68" width="180" height="341" fill="#f8fafc"/>
+  <line x1="211" y1="68" x2="211" y2="409" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="50" y="92" font-size="11" font-weight="700" fill="#94a3b8">SIDEBAR</text>
+
+  <!-- sidebar items -->
+  <text x="50" y="122" font-size="13" fill="#334155">●  Dashboard</text>
+  <rect x="42" y="135" width="158" height="26" rx="6" fill="#dbeafe"/>
+  <text x="50" y="153" font-size="13" font-weight="600" fill="#1d4ed8">●  Containers</text>
+  <text x="50" y="182" font-size="13" fill="#334155">●  Images</text>
+  <text x="50" y="210" font-size="13" fill="#94a3b8">○  Stacks</text>
+  <text x="50" y="238" font-size="13" fill="#94a3b8">○  Volumes</text>
+  <text x="50" y="266" font-size="13" fill="#94a3b8">○  Networks</text>
+  <line x1="50" y1="284" x2="190" y2="284" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="50" y="312" font-size="13" fill="#334155">⚙  Settings</text>
+
+  <!-- List / Master -->
+  <rect x="212" y="68" width="380" height="341" fill="#ffffff"/>
+  <line x1="592" y1="68" x2="592" y2="409" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="232" y="92" font-size="11" font-weight="700" fill="#94a3b8">LIST / MASTER</text>
+
+  <!-- table header -->
+  <rect x="228" y="104" width="348" height="26" rx="4" fill="#f1f5f9"/>
+  <text x="238" y="121" font-size="11" font-weight="600" fill="#64748b">Name    Status    Image    Ports ...</text>
+
+  <!-- table rows -->
+  <g font-size="11" fill="#334155">
+    <rect x="228" y="132" width="348" height="24" fill="#ffffff"/>
+    <text x="238" y="148">web      ● running   nginx     8080</text>
+    <rect x="228" y="156" width="348" height="24" fill="#f8fafc"/>
+    <text x="238" y="172">db       ● running   postgres  5432</text>
+    <rect x="228" y="180" width="348" height="24" fill="#ffffff"/>
+    <text x="238" y="196">cache    ○ stopped   redis     —</text>
+    <rect x="228" y="204" width="348" height="24" fill="#f8fafc"/>
+    <text x="238" y="220">api      ● running   my-api    3000</text>
+  </g>
+
+  <!-- Detail / Inspector -->
+  <rect x="593" y="68" width="196" height="341" fill="#fafafa"/>
+  <text x="612" y="92" font-size="11" font-weight="700" fill="#94a3b8">DETAIL / INSPECTOR</text>
+  <text x="612" y="120" font-size="12" font-weight="600" fill="#334155">選択中の詳細</text>
+
+  <!-- inspector tabs -->
+  <g font-size="11">
+    <rect x="606" y="135" width="170" height="26" rx="6" fill="#dbeafe"/>
+    <text x="616" y="152" font-weight="600" fill="#1d4ed8">Logs</text>
+    <text x="664" y="152" fill="#64748b">Stats</text>
+    <text x="714" y="152" fill="#64748b">Inspect</text>
+  </g>
+
+  <!-- log lines mock -->
+  <g font-size="9" fill="#94a3b8" font-family="ui-monospace, Menlo, monospace">
+    <text x="612" y="180">12:01 server started</text>
+    <text x="612" y="196">12:01 listening :8080</text>
+    <text x="612" y="212">12:02 GET / 200</text>
+    <text x="612" y="228">12:02 GET /api 200</text>
+  </g>
+
+  <!-- caption -->
+  <text x="30" y="440" font-size="12" fill="#64748b">NavigationSplitView ベースの 3 ペイン構成（Sidebar / List / Detail）</text>
+  <text x="30" y="458" font-size="12" fill="#94a3b8">上部タイトルバーに container-apiserver の状態インジケータ（停止中なら起動を促す）</text>
+</svg>

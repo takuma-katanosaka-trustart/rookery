@@ -1,0 +1,12 @@
+[tools]
+# Swift ツールチェーン（CLI / CI 用。UI・署名は Xcode 同梱を使う / TOOLING §1）
+swift = "6.1"
+swiftlint = "latest"
+
+# ドキュメント/テキスト品質ツール（JS）用ランタイム
+node = "22"
+pnpm = "11"   # minimumReleaseAge（サプライチェーン対策）は pnpm 11 で既定有効。pnpm-workspace.yaml 参照
+
+[settings]
+# 未インストールのツールに遭遇したら自動で入れる（任意）
+# idiomatic_version_file_enable_tools = ["node"]

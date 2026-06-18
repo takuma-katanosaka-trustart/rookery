@@ -1,0 +1,24 @@
+# 表記ゆれ統一ルール。まずは事故りにくい固有名詞のみ。運用しながら追加する。
+version: 1
+rules:
+  - expected: GitHub
+    patterns:
+      - Github
+      - GITHUB
+  - expected: macOS
+    patterns:
+      - MacOS
+      - Macos
+      - mac OS
+  - expected: JavaScript
+    patterns:
+      - Javascript
+  - expected: TypeScript
+    patterns:
+      - Typescript
+  - expected: コンテナ
+    patterns:
+      - コンテナー
+  - expected: サーバ
+    patterns:
+      - サーバー

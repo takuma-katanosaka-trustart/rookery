@@ -1,0 +1,63 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": [
+    "node_modules/**",
+    ".build/**",
+    ".git/**",
+    "pnpm-lock.yaml",
+    "*.svg",
+    "docs/images/**"
+  ],
+  "ignoreRegExpList": [
+    "/[\\p{Script=Hiragana}\\p{Script=Katakana}\\p{Script=Han}ー－、。「」『』（）！？・…：]+/gu",
+    "/`[^`]*`/g",
+    "/```[\\s\\S]*?```/g"
+  ],
+  "dictionaries": [
+    "en_US",
+    "software-terms",
+    "filetypes"
+  ],
+  "words": [
+    "apiserver",
+    "appkit",
+    "asyncstream",
+    "buildkit",
+    "cgroup",
+    "cgroups",
+    "codeql",
+    "containerization",
+    "cspell",
+    "dearu",
+    "dependabot",
+    "desumasu",
+    "dockerfile",
+    "joshi",
+    "keychain",
+    "launchctl",
+    "launchd",
+    "lefthook",
+    "lockfile",
+    "macos",
+    "Madhavapeddy",
+    "notarization",
+    "notarize",
+    "orchard",
+    "pnpm",
+    "prh",
+    "secretlint",
+    "sendable",
+    "swiftformat",
+    "swiftlint",
+    "swiftly",
+    "swiftterm",
+    "swiftui",
+    "textlint",
+    "textlintrc",
+    "vmnet",
+    "wharf",
+    "WWDC",
+    "xcuitest"
+  ]
+}

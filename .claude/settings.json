@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/textlint-review.sh",
+            "timeout": 60,
+            "statusMessage": "textlint で Markdown を自己レビュー中..."
+          }
+        ]
+      }
+    ]
+  }
+}

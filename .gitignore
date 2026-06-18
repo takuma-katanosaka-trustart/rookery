@@ -1,0 +1,12 @@
+# Node / JS ツールチェーン
+node_modules/
+
+# Swift / SPM
+.build/
+.swiftpm/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+DerivedData/
+
+# macOS
+.DS_Store

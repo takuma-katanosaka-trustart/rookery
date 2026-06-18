@@ -1,0 +1,27 @@
+{
+  "name": "apple-container-for-desktop-tooling",
+  "version": "0.0.0",
+  "private": true,
+  "description": "ドキュメント/テキスト品質チェック用ツールチェーン（cspell / secretlint / textlint）",
+  "type": "module",
+  "scripts": {
+    "prepare": "lefthook install",
+    "lint:spell": "cspell --no-progress --no-must-find-files \"**/*.{md,swift}\"",
+    "lint:text": "textlint \"**/*.md\"",
+    "lint:text:fix": "textlint --fix \"**/*.md\"",
+    "lint:secret": "secretlint \"**/*\"",
+    "lint": "pnpm run lint:secret && pnpm run lint:spell && pnpm run lint:text"
+  },
+  "devDependencies": {
+    "lefthook": "^1.7.0",
+    "cspell": "^8.0.0",
+    "secretlint": "^8.0.0",
+    "@secretlint/secretlint-rule-preset-recommend": "^8.0.0",
+    "textlint": "^14.0.0",
+    "textlint-rule-preset-ja-technical-writing": "^12.0.0",
+    "textlint-rule-prh": "^5.3.0",
+    "textlint-filter-rule-comments": "^1.2.2",
+    "prh": "^5.4.4"
+  },
+  "packageManager": "pnpm@11.3.0"
+}

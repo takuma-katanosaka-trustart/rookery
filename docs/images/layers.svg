@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" font-family="-apple-system, 'Helvetica Neue', Arial, sans-serif">
+  <defs>
+    <marker id="down" markerWidth="10" markerHeight="10" refX="4" refY="8" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L4,8 L8,0 z" fill="#94a3b8"/>
+    </marker>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="760" height="500" fill="#f8fafc"/>
+
+  <!-- Presentation -->
+  <g filter="url(#sh)">
+    <rect x="40" y="30" width="680" height="70" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  </g>
+  <text x="60" y="60" font-size="15" font-weight="700" fill="#1d4ed8">Presentation</text>
+  <text x="60" y="82" font-size="13" fill="#475569">SwiftUI Views + @Observable ViewModels</text>
+
+  <!-- Domain -->
+  <g filter="url(#sh)">
+    <rect x="40" y="120" width="680" height="80" rx="10" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
+  </g>
+  <text x="60" y="150" font-size="15" font-weight="700" fill="#6d28d9">Domain</text>
+  <text x="60" y="172" font-size="13" fill="#475569">ユースケース / エンティティ / プロトコル</text>
+  <text x="60" y="190" font-size="12" fill="#94a3b8">(ContainerService, ImageService, ...)</text>
+
+  <!-- Data Access -->
+  <g filter="url(#sh)">
+    <rect x="40" y="220" width="680" height="150" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  </g>
+  <text x="60" y="250" font-size="15" font-weight="700" fill="#047857">Data Access</text>
+  <text x="180" y="250" font-size="13" fill="#475569">ContainerBackend プロトコル</text>
+
+  <!-- XPCBackend -->
+  <g filter="url(#sh)">
+    <rect x="90" y="270" width="280" height="80" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+  </g>
+  <text x="230" y="305" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">XPCBackend</text>
+  <text x="230" y="328" text-anchor="middle" font-size="12" fill="#64748b">(ContainerAPIClient)</text>
+
+  <!-- CLIBackend -->
+  <g filter="url(#sh)">
+    <rect x="390" y="270" width="280" height="80" rx="8" fill="#ffffff" stroke="#10b981" stroke-width="1.5"/>
+  </g>
+  <text x="530" y="305" text-anchor="middle" font-size="14" font-weight="600" fill="#1e293b">CLIBackend</text>
+  <text x="530" y="328" text-anchor="middle" font-size="12" fill="#64748b">(Process + JSON)</text>
+
+  <!-- Platform -->
+  <g filter="url(#sh)">
+    <rect x="40" y="390" width="680" height="70" rx="10" fill="#f1f5f9" stroke="#64748b" stroke-width="2"/>
+  </g>
+  <text x="60" y="420" font-size="15" font-weight="700" fill="#334155">Platform</text>
+  <text x="60" y="442" font-size="13" fill="#475569">container-apiserver / container CLI</text>
+
+  <!-- dependency arrows (top -> down, 一方向) -->
+  <line x1="380" y1="100" x2="380" y2="118" stroke="#94a3b8" stroke-width="2" marker-end="url(#down)"/>
+  <line x1="380" y1="200" x2="380" y2="218" stroke="#94a3b8" stroke-width="2" marker-end="url(#down)"/>
+  <line x1="230" y1="350" x2="230" y2="388" stroke="#94a3b8" stroke-width="2" marker-end="url(#down)"/>
+  <line x1="530" y1="350" x2="530" y2="388" stroke="#94a3b8" stroke-width="2" marker-end="url(#down)"/>
+
+  <text x="392" y="113" font-size="11" fill="#94a3b8">依存（一方向）</text>
+</svg>

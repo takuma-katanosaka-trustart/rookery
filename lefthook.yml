@@ -1,0 +1,14 @@
+# Git フック定義。コミット時に「変更したファイルのみ」を対象に高速チェックする。
+# 全文走査は CI（.github/workflows/quality.yml）に寄せる。
+pre-commit:
+  parallel: true
+  commands:
+    secretlint:
+      glob: "*"
+      run: pnpm exec secretlint {staged_files}
+    cspell:
+      glob: "*.{md,swift,ts,js,json,yml,yaml,toml}"
+      run: pnpm exec cspell --no-progress --no-must-find-files {staged_files}
+    textlint:
+      glob: "*.md"
+      run: pnpm exec textlint {staged_files}

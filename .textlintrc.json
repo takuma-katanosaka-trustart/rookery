@@ -1,0 +1,21 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": {
+      "sentence-length": { "max": 120 },
+      "max-comma": { "max": 4 },
+      "max-ten": { "max": 4 },
+      "no-mix-dearu-desumasu": false,
+      "ja-no-mixed-period": false,
+      "no-exclamation-question-mark": false,
+      "no-doubled-joshi": { "min_interval": 1 },
+      "no-doubled-conjunctive-particle-ga": true,
+      "ja-no-weak-phrase": false
+    },
+    "prh": {
+      "rulePaths": ["prh.yml"]
+    }
+  },
+  "filters": {
+    "comments": true
+  }
+}
