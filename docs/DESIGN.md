@@ -4,11 +4,45 @@
 
 ---
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## 目次
+
+- [0. プロジェクト概要](#0-%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%A6%82%E8%A6%81)
+  - [立ち位置（差別化方針）](#%E7%AB%8B%E3%81%A1%E4%BD%8D%E7%BD%AE%E5%B7%AE%E5%88%A5%E5%8C%96%E6%96%B9%E9%87%9D)
+- [1. 対象基盤（`apple/container`）の理解](#1-%E5%AF%BE%E8%B1%A1%E5%9F%BA%E7%9B%A4applecontainer%E3%81%AE%E7%90%86%E8%A7%A3)
+  - [1.1 アーキテクチャ](#11-%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3)
+  - [1.2 連携可能な API 面](#12-%E9%80%A3%E6%90%BA%E5%8F%AF%E8%83%BD%E3%81%AA-api-%E9%9D%A2)
+  - [1.3 主要 CLI サブコマンド（GUI でラップ対象）](#13-%E4%B8%BB%E8%A6%81-cli-%E3%82%B5%E3%83%96%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89gui-%E3%81%A7%E3%83%A9%E3%83%83%E3%83%97%E5%AF%BE%E8%B1%A1)
+- [2. アプリケーションアーキテクチャ](#2-%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3)
+  - [2.1 レイヤ構成](#21-%E3%83%AC%E3%82%A4%E3%83%A4%E6%A7%8B%E6%88%90)
+  - [2.2 ハイブリッド連携の抽象化（最重要設計）](#22-%E3%83%8F%E3%82%A4%E3%83%96%E3%83%AA%E3%83%83%E3%83%89%E9%80%A3%E6%90%BA%E3%81%AE%E6%8A%BD%E8%B1%A1%E5%8C%96%E6%9C%80%E9%87%8D%E8%A6%81%E8%A8%AD%E8%A8%88)
+  - [2.3 CLIBackend の実装方針](#23-clibackend-%E3%81%AE%E5%AE%9F%E8%A3%85%E6%96%B9%E9%87%9D)
+  - [2.4 並行性 / 状態管理](#24-%E4%B8%A6%E8%A1%8C%E6%80%A7--%E7%8A%B6%E6%85%8B%E7%AE%A1%E7%90%86)
+- [3. モジュール / プロジェクト構成](#3-%E3%83%A2%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB--%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E6%A7%8B%E6%88%90)
+- [4. 画面設計（MVP: コンテナ + イメージ）](#4-%E7%94%BB%E9%9D%A2%E8%A8%AD%E8%A8%88mvp-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A--%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
+  - [4.1 全体レイアウト](#41-%E5%85%A8%E4%BD%93%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88)
+  - [4.2 コンテナ画面（MVP 必須）](#42-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E7%94%BB%E9%9D%A2mvp-%E5%BF%85%E9%A0%88)
+  - [4.3 イメージ画面（MVP 必須）](#43-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E7%94%BB%E9%9D%A2mvp-%E5%BF%85%E9%A0%88)
+  - [4.4 オンボーディング / システム状態（差別化・常時表示）](#44-%E3%82%AA%E3%83%B3%E3%83%9C%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0--%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E7%8A%B6%E6%85%8B%E5%B7%AE%E5%88%A5%E5%8C%96%E3%83%BB%E5%B8%B8%E6%99%82%E8%A1%A8%E7%A4%BA)
+- [5. 技術的な要注意ポイント](#5-%E6%8A%80%E8%A1%93%E7%9A%84%E3%81%AA%E8%A6%81%E6%B3%A8%E6%84%8F%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88)
+- [6. ロードマップ（フェーズ分割）](#6-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97%E3%83%95%E3%82%A7%E3%83%BC%E3%82%BA%E5%88%86%E5%89%B2)
+  - [Phase 0 — 基盤づくり（1〜2 週）](#phase-0--%E5%9F%BA%E7%9B%A4%E3%81%A5%E3%81%8F%E3%82%8A1%E3%80%9C2-%E9%80%B1)
+  - [Phase 1 — MVP（コンテナ + イメージ）★今回スコープ](#phase-1--mvp%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A--%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E2%98%85%E4%BB%8A%E5%9B%9E%E3%82%B9%E3%82%B3%E3%83%BC%E3%83%97)
+  - [Phase 2 — 差別化機能](#phase-2--%E5%B7%AE%E5%88%A5%E5%8C%96%E6%A9%9F%E8%83%BD)
+  - [Phase 3 — 発展](#phase-3--%E7%99%BA%E5%B1%95)
+- [7. 差別化機能の詳細: Stacks（Compose 風）](#7-%E5%B7%AE%E5%88%A5%E5%8C%96%E6%A9%9F%E8%83%BD%E3%81%AE%E8%A9%B3%E7%B4%B0-stackscompose-%E9%A2%A8)
+- [8. 未確定事項 / 次アクションで検証すべきこと](#8-%E6%9C%AA%E7%A2%BA%E5%AE%9A%E4%BA%8B%E9%A0%85--%E6%AC%A1%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A7%E6%A4%9C%E8%A8%BC%E3%81%99%E3%81%B9%E3%81%8D%E3%81%93%E3%81%A8)
+- [付録 A: 技術スタック一覧](#%E4%BB%98%E9%8C%B2-a-%E6%8A%80%E8%A1%93%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E4%B8%80%E8%A6%A7)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 0. プロジェクト概要
 
 | 項目       | 内容                                                                     |
 | ---------- | ------------------------------------------------------------------------ |
-| 名称 | **Rookery**（🐧 ペンギンの集団繁殖地＝多数のコンテナが集うホストの比喩）                   |
+| 名称       | **Rookery**（🐧 ペンギンの集団繁殖地＝多数のコンテナが集うホストの比喩） |
 | 種別       | macOS ネイティブ デスクトップアプリ（OSS）                               |
 | 言語 / UI  | Swift 6 / SwiftUI（必要箇所のみ AppKit ブリッジ）                        |
 | 動作要件   | **macOS 26 以降 / Apple silicon 専用**（`apple/container` の制約に準拠） |
@@ -48,15 +82,15 @@
 
 | 操作領域                                                     | XPC（`ContainerAPIClient`） | CLI（`container ...`） |
 | ------------------------------------------------------------ | --------------------------- | ---------------------- |
-| コンテナ list/start/stop/kill/delete/exec/logs/stats/inspect | ✅ 想定可                    | ✅                      |
-| イメージ list/pull/push/tag/delete/inspect                   | ✅ 想定可                    | ✅                      |
-| ネットワーク CRUD/inspect                                    | ✅ 想定可                    | ✅                      |
-| ボリューム CRUD/inspect                                      | △（要検証）                 | ✅                      |
-| **system start/stop/status**                                 | ❌ 未公開                    | ✅（CLI 必須）          |
-| **builder（BuildKit）start/stop/status**                     | ❌ 未公開                    | ✅                      |
-| **DNS domain / system property / kernel set**                | ❌ 未公開                    | ✅                      |
-| **build（Dockerfile）**                                      | ❌（BuildKit 経由）          | ✅                      |
-| registry login/logout/list                                   | △                           | ✅                      |
+| コンテナ list/start/stop/kill/delete/exec/logs/stats/inspect | ✅ 想定可                   | ✅                     |
+| イメージ list/pull/push/tag/delete/inspect                   | ✅ 想定可                   | ✅                     |
+| ネットワーク CRUD/inspect                                    | ✅ 想定可                   | ✅                     |
+| ボリューム CRUD/inspect                                      | △（要検証）                 | ✅                     |
+| **system start/stop/status**                                 | ❌ 未公開                   | ✅（CLI 必須）         |
+| **builder（BuildKit）start/stop/status**                     | ❌ 未公開                   | ✅                     |
+| **DNS domain / system property / kernel set**                | ❌ 未公開                   | ✅                     |
+| **build（Dockerfile）**                                      | ❌（BuildKit 経由）         | ✅                     |
+| registry login/logout/list                                   | △                           | ✅                     |
 
 > Orchard も同じ「XPC 主軸 + 一部 CLI」のハイブリッドを採用している。**system/builder/DNS/property/kernel は当面 CLI 呼び出しが必須**という事実が、§2 のアーキテクチャ設計を規定する。
 
@@ -232,11 +266,13 @@ apple-container-for-desktop/
 ## 6. ロードマップ（フェーズ分割）
 
 ### Phase 0 — 基盤づくり（1〜2 週）
+
 - SPM マルチモジュール骨格、Xcode app target、CI（ビルド/lint/test）。
 - `ContainerBackend` プロトコル定義 + **モックバックエンド**（UI を実機なしで開発可能に）。
 - `CLIBackend` の最小実装（`ls --format json` で疎通確認）。
 
 ### Phase 1 — MVP（コンテナ + イメージ）★今回スコープ
+
 - システム状態検知 + オンボーディング（`system start` 連携）。
 - コンテナ一覧/操作/ログ/stats/inspect/terminal(exec)。
 - イメージ一覧/pull/build/tag/delete/run。
@@ -244,11 +280,13 @@ apple-container-for-desktop/
 - ja/en ローカライズ。Developer ID 署名 + notarization で初回リリース。
 
 ### Phase 2 — 差別化機能
+
 - **Stacks（Compose 風）**: YAML スキーマ定義、起動/破棄、依存順制御、Stack エディタ GUI。
 - ネットワーク / ボリューム管理 UI。
 - メニューバー常駐、レジストリ管理、kernel/property 設定 GUI。
 
 ### Phase 3 — 発展
+
 - ダッシュボード（リソース全体可視化）、テンプレート/お気に入り、`cp` ファイルブラウザ、英語以外の i18n 拡充、自動更新。
 
 ---

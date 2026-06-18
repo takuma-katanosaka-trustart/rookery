@@ -1,14 +1,23 @@
-# Git フック定義。コミット時に「変更したファイルのみ」を対象に高速チェックする。
+# Git フック定義。コミット時に「変更したファイルのみ」を対象に処理する。
+# 順序が重要なため parallel: false。整形(目次→prettier)を先に行い再ステージしてから lint する。
 # 全文走査は CI（.github/workflows/quality.yml）に寄せる。
 pre-commit:
-  parallel: true
+  parallel: false
   commands:
-    secretlint:
+    1_toc:
+      glob: "*.md"
+      run: pnpm exec doctoc --github --title '## 目次' --update-only {staged_files}
+      stage_fixed: true
+    2_format:
+      glob: "*.md"
+      run: pnpm exec prettier --write {staged_files}
+      stage_fixed: true
+    3_secretlint:
       glob: "*"
       run: pnpm exec secretlint {staged_files}
-    cspell:
+    4_cspell:
       glob: "*.{md,swift,ts,js,json,yml,yaml,toml}"
       run: pnpm exec cspell --no-progress --no-must-find-files {staged_files}
-    textlint:
+    5_textlint:
       glob: "*.md"
       run: pnpm exec textlint {staged_files}

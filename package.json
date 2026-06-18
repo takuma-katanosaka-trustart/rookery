@@ -2,10 +2,13 @@
   "name": "apple-container-for-desktop-tooling",
   "version": "0.0.0",
   "private": true,
-  "description": "ドキュメント/テキスト品質チェック用ツールチェーン（cspell / secretlint / textlint）",
+  "description": "ドキュメント/テキスト品質チェック用ツールチェーン（prettier / doctoc / cspell / secretlint / textlint）",
   "type": "module",
   "scripts": {
     "prepare": "lefthook install",
+    "format": "prettier --write \"**/*.md\"",
+    "format:check": "prettier --check \"**/*.md\"",
+    "toc": "doctoc --github --title '## 目次' --update-only README.md docs",
     "lint:spell": "cspell --no-progress --no-must-find-files \"**/*.{md,swift}\"",
     "lint:text": "textlint \"**/*.md\"",
     "lint:text:fix": "textlint --fix \"**/*.md\"",
@@ -14,6 +17,8 @@
   },
   "devDependencies": {
     "lefthook": "^1.7.0",
+    "prettier": "^3.0.0",
+    "doctoc": "^2.2.0",
     "cspell": "^10.0.1",
     "secretlint": "^13.0.2",
     "@secretlint/secretlint-rule-preset-recommend": "^13.0.2",

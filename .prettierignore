@@ -1,0 +1,6 @@
+node_modules
+pnpm-lock.yaml
+.build
+.swiftpm
+docs/images
+*.svg

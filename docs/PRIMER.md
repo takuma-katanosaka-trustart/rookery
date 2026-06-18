@@ -6,15 +6,41 @@
 
 ---
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## 目次
+
+- [全体像 — この資料がカバーする3層](#%E5%85%A8%E4%BD%93%E5%83%8F--%E3%81%93%E3%81%AE%E8%B3%87%E6%96%99%E3%81%8C%E3%82%AB%E3%83%90%E3%83%BC%E3%81%99%E3%82%8B3%E5%B1%A4)
+- [第I部: GUI アプリ本体（Swift / SwiftUI）](#%E7%AC%ACi%E9%83%A8-gui-%E3%82%A2%E3%83%97%E3%83%AA%E6%9C%AC%E4%BD%93swift--swiftui)
+  - [§1. Swift の必須概念（このプロジェクトで頻出するものだけ）](#1-swift-%E3%81%AE%E5%BF%85%E9%A0%88%E6%A6%82%E5%BF%B5%E3%81%93%E3%81%AE%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%A7%E9%A0%BB%E5%87%BA%E3%81%99%E3%82%8B%E3%82%82%E3%81%AE%E3%81%A0%E3%81%91)
+  - [§2. 並行性 — async/await・actor・AsyncStream（最重要・事故多発地帯）](#2-%E4%B8%A6%E8%A1%8C%E6%80%A7--asyncawait%E3%83%BBactor%E3%83%BBasyncstream%E6%9C%80%E9%87%8D%E8%A6%81%E3%83%BB%E4%BA%8B%E6%95%85%E5%A4%9A%E7%99%BA%E5%9C%B0%E5%B8%AF)
+  - [§3. SwiftUI と状態管理（@Observable）](#3-swiftui-%E3%81%A8%E7%8A%B6%E6%85%8B%E7%AE%A1%E7%90%86observable)
+  - [§4. プロセス起動 — Foundation.Process（CLI 連携の土台）](#4-%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E8%B5%B7%E5%8B%95--foundationprocesscli-%E9%80%A3%E6%90%BA%E3%81%AE%E5%9C%9F%E5%8F%B0)
+- [第II部: アプリ ↔ container 連携（XPC）](#%E7%AC%ACii%E9%83%A8-%E3%82%A2%E3%83%97%E3%83%AA--container-%E9%80%A3%E6%90%BAxpc)
+  - [§5. XPC とは — macOS のプロセス間通信（本プロジェクトの背骨）](#5-xpc-%E3%81%A8%E3%81%AF--macos-%E3%81%AE%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E9%96%93%E9%80%9A%E4%BF%A1%E6%9C%AC%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E8%83%8C%E9%AA%A8)
+  - [§6. ハイブリッド連携の勘所（XPC + CLI の使い分け）](#6-%E3%83%8F%E3%82%A4%E3%83%96%E3%83%AA%E3%83%83%E3%83%89%E9%80%A3%E6%90%BA%E3%81%AE%E5%8B%98%E6%89%80xpc--cli-%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91)
+- [第III部: container が動く仕組み（仮想化スタック）](#%E7%AC%ACiii%E9%83%A8-container-%E3%81%8C%E5%8B%95%E3%81%8F%E4%BB%95%E7%B5%84%E3%81%BF%E4%BB%AE%E6%83%B3%E5%8C%96%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF)
+  - [§7. コンテナと VM の違い、そして container の独自モデル](#7-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%81%A8-vm-%E3%81%AE%E9%81%95%E3%81%84%E3%81%9D%E3%81%97%E3%81%A6-container-%E3%81%AE%E7%8B%AC%E8%87%AA%E3%83%A2%E3%83%87%E3%83%AB)
+  - [§8. Virtualization.framework と vmnet](#8-virtualizationframework-%E3%81%A8-vmnet)
+  - [§9. launchd — macOS のサービス管理](#9-launchd--macos-%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E7%AE%A1%E7%90%86)
+  - [§10. OCI イメージとレジストリ](#10-oci-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%A8%E3%83%AC%E3%82%B8%E3%82%B9%E3%83%88%E3%83%AA)
+- [第IV部: 学習の進め方](#%E7%AC%ACiv%E9%83%A8-%E5%AD%A6%E7%BF%92%E3%81%AE%E9%80%B2%E3%82%81%E6%96%B9)
+  - [§11. 推奨学習ルート（最短で「読めて・直せて・運用判断できる」状態へ）](#11-%E6%8E%A8%E5%A5%A8%E5%AD%A6%E7%BF%92%E3%83%AB%E3%83%BC%E3%83%88%E6%9C%80%E7%9F%AD%E3%81%A7%E8%AA%AD%E3%82%81%E3%81%A6%E3%83%BB%E7%9B%B4%E3%81%9B%E3%81%A6%E3%83%BB%E9%81%8B%E7%94%A8%E5%88%A4%E6%96%AD%E3%81%A7%E3%81%8D%E3%82%8B%E7%8A%B6%E6%85%8B%E3%81%B8)
+  - [§12. 「破綻」を避けるチェックリスト（運用で見る勘所）](#12-%E7%A0%B4%E7%B6%BB%E3%82%92%E9%81%BF%E3%81%91%E3%82%8B%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%88%E9%81%8B%E7%94%A8%E3%81%A7%E8%A6%8B%E3%82%8B%E5%8B%98%E6%89%80)
+  - [付録: 用語ミニ辞典](#%E4%BB%98%E9%8C%B2-%E7%94%A8%E8%AA%9E%E3%83%9F%E3%83%8B%E8%BE%9E%E5%85%B8)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 全体像 — この資料がカバーする3層
 
 本アプリは、大きく3つの技術領域の上に成り立っている。どれか1つでも理解が欠けると、障害時に「どこを見ればいいか分からない」状態になる。
 
-| 層 | 技術 | 本書の節 |
-| --- | --- | --- |
-| ① GUI アプリ本体 | Swift / SwiftUI / 並行性 / Process | §1〜§4 |
-| ② アプリ ↔ container 連携 | XPC / ContainerAPIClient / CLI | §5〜§6 |
-| ③ container が動く仕組み | Virtualization.framework / vmnet / launchd / OCI | §7〜§10 |
+| 層                        | 技術                                             | 本書の節 |
+| ------------------------- | ------------------------------------------------ | -------- |
+| ① GUI アプリ本体          | Swift / SwiftUI / 並行性 / Process               | §1〜§4   |
+| ② アプリ ↔ container 連携 | XPC / ContainerAPIClient / CLI                   | §5〜§6   |
+| ③ container が動く仕組み  | Virtualization.framework / vmnet / launchd / OCI | §7〜§10  |
 
 ---
 
@@ -59,6 +85,7 @@
 **なぜ重要か:** Swift 6 の strict concurrency は厳しく、AI が「とりあえず動く」コードを書くと**コンパイルが通らない or 警告だらけ**になりがち。`Sendable`/`actor`/`@MainActor` の意味を分かっていないと、エラーメッセージの海で迷子になる。
 
 **運用で効いてくる点:**
+
 - UI 更新は必ずメインスレッド（`@MainActor`）で行う。ここを誤ると「たまに UI が固まる/更新されない」再現性の低いバグになる。
 - ストリーム（ログ等）は**必ず終了処理（キャンセル）を書く**。書き忘れると Process が残り続けてリソースリーク → 運用中にメモリ・FD が枯渇する。
 
@@ -106,6 +133,7 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 **なぜ重要か:** XPC で未公開の操作（system/builder/DNS など）は CLI 経由が必須。Process の扱いは本プロジェクトの避けられない要素。
 
 **運用で効いてくる点（事故りやすい順）:**
+
 1. **パス解決**: ユーザの `PATH` に依存しない。絶対パス（`/usr/local/bin/container`）を基本にし、設定で上書き可能に。
 2. **大量出力でのデッドロック**: stdout を読まずに `waitUntilExit()` するとパイプが詰まって固まる。**読み取りと終了待ちを並行**させる。
 3. **ストリーム（`-f`）の終了**: フォロー系は明示的に `terminate()` しないとゾンビ化 → §2 のリーク問題と直結。
@@ -138,11 +166,13 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 - ただし **1.0.0 で v0 系 XPC API の互換が削除**された＝**バージョン不一致は通信断の原因**となる。これは運用で最重要の注意点。
 
 **なぜ重要か:** 「アプリが動かない」ときの切り分けが、XPC を理解しているかで天と地ほど変わる。
+
 - apiserver が起動していない（launchd 未登録/停止）のか
 - XPC のバージョン/権限が合わないのか
 - そもそも CLI 経路の問題なのか
 
 **運用で効いてくる点:**
+
 - **バージョン整合性**: アプリがリンクした `ContainerAPIClient` のバージョンと、インストール済み `container` のバージョンがズレると XPC が通らない。→ 起動時に `container system version` でバージョン検証し、不一致を UI で警告する設計が要る（[DESIGN §5](./DESIGN.md) の「API 安定性」リスク）。
 - **接続エラーの扱い**: XPC 接続は中断され得る（相手プロセスがクラッシュ/再起動）。再接続・タイムアウト・CLI フォールバックを実装する（[DESIGN §2.2](./DESIGN.md) の `HybridBackend`）。
 - **コード署名**: XPC は接続元の署名を検証することがある。配布時の署名（§後述・Developer ID）が崩れると通信が拒否されうる。
@@ -155,14 +185,15 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 
 **何か:** 本プロジェクトは「XPC を主軸、未公開操作は CLI」というハイブリッド（[DESIGN §1.2 / §2.2](./DESIGN.md)）。ここは**設計判断が運用品質を直接左右する**ので独立して押さえる。
 
-| 観点 | XPC 経路 | CLI 経路 |
-| --- | --- | --- |
-| 速度 | 速い（プロセス起動不要） | 遅い（毎回 Process 起動） |
-| 型安全 | 高い（Swift API） | 低い（JSON 文字列をパース） |
-| 安定性 | バージョン整合性に敏感 | CLI の出力フォーマット変更に敏感 |
-| カバー範囲 | 一部未公開 | ほぼ全機能 |
+| 観点       | XPC 経路                 | CLI 経路                         |
+| ---------- | ------------------------ | -------------------------------- |
+| 速度       | 速い（プロセス起動不要） | 遅い（毎回 Process 起動）        |
+| 型安全     | 高い（Swift API）        | 低い（JSON 文字列をパース）      |
+| 安定性     | バージョン整合性に敏感   | CLI の出力フォーマット変更に敏感 |
+| カバー範囲 | 一部未公開               | ほぼ全機能                       |
 
 **運用で効いてくる点:**
+
 - **両経路で同じドメインモデルに収束**させる（[DESIGN §2.2](./DESIGN.md)）。でないと「XPC と CLI で取得結果が食い違う」という最悪のバグになる。
 - **フォールバックは「黙って」やらない**。XPC 失敗→CLI 成功を続けると、XPC が壊れていることに気付けない。ログ/メトリクスに残す。
 - CLI の `--format json` 出力は**将来のバージョンで変わりうる**。パーサは寛容に（未知フィールドを無視）作る。
@@ -176,10 +207,12 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 ## §7. コンテナと VM の違い、そして container の独自モデル
 
 **何か:**
+
 - **従来のコンテナ（Docker/Linux）**: 1つの Linux カーネルを共有し、プロセスを名前空間で隔離する。軽いが、ホストが Linux でないと動かない（macOS では裏で1つの大きな Linux VM を動かしていた）。
 - **Apple container のモデル**: **コンテナごとに専用の軽量 Linux VM を立てる**。各コンテナが独立カーネルを持つ。
 
 **なぜこの設計か（＝運用で効く理解）:**
+
 - **強い隔離**: コンテナ間がVM境界で分離 → セキュリティが高い。
 - **起動の速さ**: アップルが軽量化した VM + 専用 Linux カーネルで、VMながら高速起動を狙う。
 - **代償**: コンテナごとに VM のオーバーヘッド（メモリ等）。**多数同時起動はホスト資源を食う** → [DESIGN §5](./DESIGN.md) の「多数 VM の負荷」リスクの根拠。
@@ -197,6 +230,7 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 **vmnet（何か）:** VM に仮想ネットワーク（IPアドレス・NAT・ホスト⇔VM通信）を提供するフレームワーク。コンテナのポート公開（`-p 8080:8080`）やコンテナ間通信はこの層が支える。
 
 **運用で効いてくる点:**
+
 - **ネットワーク不通の切り分け**: 「ポートに繋がらない」時、原因は ①コンテナ内アプリ ②ポートフォワード設定 ③vmnet/ネットワーク設定 のどこか。層を意識すると切り分けが速い。
 - **vmnet は特権を要する**ことがあり、権限・ネットワーク設定が絡むトラブルの温床。macOS のネットワーク権限ダイアログを疑う。
 - **macOS 26 のネットワーク機能**に依存する操作（user-defined network など）があり、OS バージョンが要件を満たさないと機能が欠ける。
@@ -215,6 +249,7 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 **なぜ重要か:** 「apiserver が動いていない」系トラブルの本丸。GUI の「ワンクリック起動」（[DESIGN §4.4 オンボーディング](./DESIGN.md)）は内部的に launchd 経由の `system start` を呼ぶ。
 
 **運用で効いてくる点:**
+
 - 状態確認: `container system status`、ログ: `container system logs`（内部は Unified Logging）。
 - launchd 登録の破損や古いバージョンの残留があると、起動失敗・バージョン不整合を招く。アップデート時は登録の入れ替えに注意。
 
@@ -231,6 +266,7 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 - **build は BuildKit 経由**で、container では builder（BuildKit）プロセスを別途起動する必要がある（[DESIGN §1.2](./DESIGN.md)）。
 
 **運用で効いてくる点:**
+
 - `pull` が遅い/失敗 → ネットワーク or レジストリ認証 or レイヤキャッシュを疑う。
 - `build` が動かない → **builder が起動しているか**を最初に確認（GUI で自動起動を促す設計）。
 - 資格情報は Keychain にあるので、消えた/壊れた時は Keychain を見る。
@@ -264,21 +300,21 @@ let data = out.fileHandleForReading.readDataToEndOfFile()
 
 ## 付録: 用語ミニ辞典
 
-| 用語 | 一言で |
-| --- | --- |
-| XPC | macOS の安全なプロセス間通信。container 連携の背骨 |
-| launchd | macOS のサービス管理の親玉。apiserver を起動・常駐させる |
-| apiserver | `container-apiserver`。コンテナ操作の実体。XPC で話しかける相手 |
-| ContainerAPIClient | apiserver と XPC で話す Swift ライブラリ（CLI 不要の型付き API） |
-| Virtualization.framework | Apple silicon で軽量 VM を作るフレームワーク |
-| vmnet | VM に仮想ネットワークを提供するフレームワーク |
-| OCI | コンテナイメージ/レジストリの標準仕様 |
-| BuildKit | イメージビルドのエンジン。container では builder として別起動 |
-| actor | Swift のデータ競合防止の仕組み（アクセスを直列化） |
-| Sendable | スレッド間で安全に渡せることを示す印（Swift 6 で強制） |
-| @Observable | 状態変更を UI に自動反映させる SwiftUI の仕組み |
-| AsyncStream | 値が次々届く非同期の流れ（ログ・統計・進捗に使う） |
+| 用語                     | 一言で                                                           |
+| ------------------------ | ---------------------------------------------------------------- |
+| XPC                      | macOS の安全なプロセス間通信。container 連携の背骨               |
+| launchd                  | macOS のサービス管理の親玉。apiserver を起動・常駐させる         |
+| apiserver                | `container-apiserver`。コンテナ操作の実体。XPC で話しかける相手  |
+| ContainerAPIClient       | apiserver と XPC で話す Swift ライブラリ（CLI 不要の型付き API） |
+| Virtualization.framework | Apple silicon で軽量 VM を作るフレームワーク                     |
+| vmnet                    | VM に仮想ネットワークを提供するフレームワーク                    |
+| OCI                      | コンテナイメージ/レジストリの標準仕様                            |
+| BuildKit                 | イメージビルドのエンジン。container では builder として別起動    |
+| actor                    | Swift のデータ競合防止の仕組み（アクセスを直列化）               |
+| Sendable                 | スレッド間で安全に渡せることを示す印（Swift 6 で強制）           |
+| @Observable              | 状態変更を UI に自動反映させる SwiftUI の仕組み                  |
+| AsyncStream              | 値が次々届く非同期の流れ（ログ・統計・進捗に使う）               |
 
 ---
 
-*この資料は [DESIGN.md](./DESIGN.md) の設計判断の「なぜ」を支える背景知識をまとめたもの。設計書とセットで読むと、各設計判断（ハイブリッド連携・actor・ポーリング・署名）がどの技術的制約から来ているかが繋がる。*
+_この資料は [DESIGN.md](./DESIGN.md) の設計判断の「なぜ」を支える背景知識をまとめたもの。設計書とセットで読むと、各設計判断（ハイブリッド連携・actor・ポーリング・署名）がどの技術的制約から来ているかが繋がる。_

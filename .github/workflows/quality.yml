@@ -17,6 +17,14 @@ jobs:
         uses: jdx/mise-action@e6a8b3978addb5a52f2b4cd9d91eafa7f0ab959d # v4.2.0
       - name: Install JS tools
         run: pnpm install --frozen-lockfile
+      # 目次(doctoc)→整形(prettier)の順で不動点に正規化し、差分が無いことを確認する
+      # （doctoc と prettier は空行の扱いが異なるため、必ず toc→format の順で揃える）
+      - name: Format & TOC up-to-date
+        run: |
+          pnpm run toc
+          pnpm run format
+          git diff --exit-code -- '*.md' \
+            || { echo "::error::Markdown が未整形か目次が古いです。'pnpm run toc && pnpm run format' を実行してコミットしてください"; exit 1; }
       - name: Secret lint
         run: pnpm run lint:secret
       - name: Spell check (cspell)
