@@ -25,6 +25,7 @@
   - [インストール](#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB-1)
   - [設定ファイル雛形（リポジトリルート `.swiftlint.yml`）](#%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E9%9B%9B%E5%BD%A2%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%83%AB%E3%83%BC%E3%83%88-swiftlintyml)
   - [実行](#%E5%AE%9F%E8%A1%8C-1)
+  - [ソースのライセンスヘッダ](#%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%AE%E3%83%A9%E3%82%A4%E3%82%BB%E3%83%B3%E3%82%B9%E3%83%98%E3%83%83%E3%83%80)
 - [5. 型・並行性チェック：Swift 6 strict concurrency](#5-%E5%9E%8B%E3%83%BB%E4%B8%A6%E8%A1%8C%E6%80%A7%E3%83%81%E3%82%A7%E3%83%83%E3%82%AFswift-6-strict-concurrency)
 - [6. テスト：Swift Testing + XCUITest](#6-%E3%83%86%E3%82%B9%E3%83%88swift-testing--xcuitest)
   - [Swift Testing（単体・統合テスト, 新公式）](#swift-testing%E5%8D%98%E4%BD%93%E3%83%BB%E7%B5%B1%E5%90%88%E3%83%86%E3%82%B9%E3%83%88-%E6%96%B0%E5%85%AC%E5%BC%8F)
@@ -215,9 +216,16 @@ opt_in_rules:
   - first_where
   - explicit_init
   - closure_spacing
+  - file_header             # 全 .swift にライセンスヘッダを強制
 
 disabled_rules:
   - todo                    # TODO コメントは許容
+
+# ソース冒頭の Apache-2.0 ヘッダ（SPDX 形式・著作権者は個人）を必須にする
+file_header:
+  required_pattern: |
+    \/\/ SPDX-License-Identifier: Apache-2\.0
+    \/\/ Copyright \d{4} Takuma Katanosaka
 
 included:
   - Packages
@@ -244,6 +252,18 @@ function_body_length:
 swiftlint              # 警告/エラーを表示
 swiftlint --fix        # 自動修正可能なものを修正
 ```
+
+### ソースのライセンスヘッダ
+
+全 `.swift` ファイルの先頭に、SPDX 形式の Apache-2.0 ヘッダを付ける（著作権者は**個人**）。
+
+```swift
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2026 Takuma Katanosaka
+```
+
+- SPDX 短縮形を採用（全文ヘッダより簡潔・機械可読）。全文を入れたい場合は [LICENSE](../LICENSE) 末尾 APPENDIX の告知文を使う。
+- 上記 `.swiftlint.yml` の `file_header` ルールが**ヘッダの有無をチェック**する。Phase 0 でソース作成と同時に導入する。
 
 ---
 
