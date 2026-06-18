@@ -99,4 +99,4 @@ swift test
 
 ## ライセンス
 
-Apache-2.0（予定。`apple/container` との整合のため）。
+[Apache License 2.0](LICENSE)。`apple/container` との整合を意図しています。

@@ -1,4 +1,16 @@
 {
+    "editor.defaultFormatter": "ms-python.python",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.autoIndent": "none", // 自動インデントをoffにする
+    "editor.renderControlCharacters": true, // 制御文字を表示する
+    "editor.rulers": [
+        120
+    ],
+    "editor.minimap.enabled": false, // ミニマップを非表示にする
+    "breadcrumbs.enabled": true, // ファイルのパンくずリストを表示する
+    "editor.renderLineHighlight": "all", // 選択行の行番号をハイライトする
+    "editor.bracketPairColorization.enabled": true, // 括弧の対応を色付ける
     "workbench.colorCustomizations": {
         "activityBar.activeBackground": "#1f6fd0",
         "activityBar.background": "#1f6fd0",
@@ -18,5 +30,19 @@
         "titleBar.inactiveBackground": "#1857a499",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#1857a4"
+    "peacock.color": "#1857a4",
+    "[markdown]": {
+        "editor.unicodeHighlight.ambiguousCharacters": false,
+        "editor.unicodeHighlight.invisibleCharacters": false,
+        "diffEditor.ignoreTrimWhitespace": false,
+        "editor.wordWrap": "off",
+        "editor.quickSuggestions": {
+            "comments": "off",
+            "strings": "off",
+            "other": "off"
+        },
+        "cSpell.fixSpellingWithRenameProvider": true,
+        "cSpell.advanced.feature.useReferenceProviderWithRename": true,
+        "cSpell.advanced.feature.useReferenceProviderRemove": "/^#+\\s/"
+    }
 }

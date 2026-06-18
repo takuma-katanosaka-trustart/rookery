@@ -2,6 +2,7 @@
   "name": "apple-container-for-desktop-tooling",
   "version": "0.0.0",
   "private": true,
+  "license": "Apache-2.0",
   "description": "ドキュメント/テキスト品質チェック用ツールチェーン（prettier / doctoc / cspell / secretlint / textlint）",
   "type": "module",
   "scripts": {
