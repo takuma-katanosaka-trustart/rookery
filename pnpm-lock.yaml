@@ -18,8 +18,8 @@ importers:
         specifier: ^1.7.0
         version: 1.13.6
       prh:
-        specifier: ^5.4.4
-        version: 5.4.4
+        specifier: ^6.0.6
+        version: 6.0.6
       secretlint:
         specifier: ^8.0.0
         version: 8.5.0
@@ -691,6 +691,10 @@ packages:
     resolution: {integrity: sha512-/rFeCpNJQbhSZjGVwO9RFV3xPqbnERS8MmIQzCtD/zl6gpJuV/bMLuN92oG3F7d8oDEHHRrujSXNUr8fpjntKw==}
     engines: {node: '>=18'}
 
+  commander@14.0.3:
+    resolution: {integrity: sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw==}
+    engines: {node: '>=20'}
+
   commandpost@1.4.0:
     resolution: {integrity: sha512-aE2Y4MTFJ870NuB/+2z1cXBhSBBzRydVVjzhFC4gtenEhpnj15yu0qptWGJsO9YGrcPZ3ezX8AWb1VA391MKpQ==}
 
@@ -814,6 +818,10 @@ packages:
 
   diff@5.2.2:
     resolution: {integrity: sha512-vtcDfH3TOjP8UekytvnHH1o1P4FcUdt4eQ1Y+Abap1tk/OB2MWQvcwS2ClCd1zuIhc3JKOx6p3kod8Vfys3E+A==}
+    engines: {node: '>=0.3.1'}
+
+  diff@9.0.0:
+    resolution: {integrity: sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw==}
     engines: {node: '>=0.3.1'}
 
   doublearray@0.0.2:
@@ -1818,6 +1826,11 @@ packages:
 
   prh@5.4.4:
     resolution: {integrity: sha512-UATF+R/2H8owxwPvF12Knihu9aYGTuZttGHrEEq5NBWz38mREh23+WvCVKX3fhnIZIMV7ye6E1fnqAl+V6WYEw==}
+    hasBin: true
+
+  prh@6.0.6:
+    resolution: {integrity: sha512-WJ7aaIa37vwHYg5sa1VaqykJiO/6AEkbQOTEnp/52XDXnbMcBPY1++oeV5trjFrLbiTqJY5nO5BaR/MR5ioJHw==}
+    engines: {node: '>=22'}
     hasBin: true
 
   property-information@5.6.0:
@@ -3216,6 +3229,8 @@ snapshots:
 
   commander@13.1.0: {}
 
+  commander@14.0.3: {}
+
   commandpost@1.4.0: {}
 
   comment-json@4.6.2:
@@ -3379,6 +3394,8 @@ snapshots:
   diff@4.0.4: {}
 
   diff@5.2.2: {}
+
+  diff@9.0.0: {}
 
   doublearray@0.0.2: {}
 
@@ -4488,6 +4505,12 @@ snapshots:
       commandpost: 1.4.0
       diff: 4.0.4
       js-yaml: 3.14.2
+
+  prh@6.0.6:
+    dependencies:
+      commander: 14.0.3
+      diff: 9.0.0
+      js-yaml: 4.2.0
 
   property-information@5.6.0:
     dependencies:
