@@ -8,7 +8,7 @@
 
 | 項目       | 内容                                                                     |
 | ---------- | ------------------------------------------------------------------------ |
-| 名称（仮） | **Wharf**（候補: Berth / Quay / Anchor / Pier — 後述）                   |
+| 名称 | **Rookery**（🐧 ペンギンの集団繁殖地＝多数のコンテナが集うホストの比喩）                   |
 | 種別       | macOS ネイティブ デスクトップアプリ（OSS）                               |
 | 言語 / UI  | Swift 6 / SwiftUI（必要箇所のみ AppKit ブリッジ）                        |
 | 動作要件   | **macOS 26 以降 / Apple silicon 専用**（`apple/container` の制約に準拠） |
@@ -157,7 +157,7 @@ Swift Package Manager ベースの**マルチモジュール構成**（Xcode プ
 ```sh
 apple-container-for-desktop/
 ├── App/                      # Xcode app target (薄いシェル, entitlements, Info.plist)
-│   └── WharfApp.swift
+│   └── RookeryApp.swift
 ├── Packages/
 │   ├── Backend/              # ContainerBackend, XPCBackend, CLIBackend, HybridBackend
 │   ├── Domain/               # エンティティ, ユースケース, プロトコル
@@ -258,7 +258,7 @@ apple-container-for-desktop/
 `apple/container` には Compose 相当が無い。これを GUI 主導で埋めるのが最大の差別化。
 
 ```yaml
-# wharf-stack.yaml（独自スキーマ。将来 compose 互換サブセット取り込みも検討）
+# rookery-stack.yaml（独自スキーマ。将来 compose 互換サブセット取り込みも検討）
 name: my-web-app
 services:
   db:
@@ -289,7 +289,7 @@ networks:
 2. **XPC でのストリーミング/イベント購読の可否**（logs/stats をポーリングせず購読できるか）。
 3. **ボリューム/ネットワーク/registry の XPC 公開状況**（CLI 必須範囲の確定）。
 4. **macOS 26 CI ランナーの入手性**（GitHub Actions / セルフホスト）。
-5. **プロジェクト名の確定**（Wharf / Berth / Quay / Anchor / Pier）。
+5. ~~プロジェクト名の確定~~ → **Rookery に確定**（🐧 ペンギンの集団繁殖地＝多数のコンテナが集うホストの比喩）。
 6. **SwiftTerm 採用可否**の PoC（exec ターミナル）。
 
 ---

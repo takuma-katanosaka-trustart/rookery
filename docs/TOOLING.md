@@ -90,7 +90,7 @@ swift run              # 実行（CLI ターゲットの場合）
 import PackageDescription
 
 let package = Package(
-    name: "Wharf",
+    name: "Rookery",
     platforms: [.macOS("26.0")],
     products: [
         .library(name: "Backend", targets: ["Backend"]),
