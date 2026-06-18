@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@secretlint/secretlint-rule-preset-recommend':
-        specifier: ^8.0.0
-        version: 8.5.0
+        specifier: ^13.0.2
+        version: 13.0.2
       cspell:
         specifier: ^8.0.0
         version: 8.19.4
@@ -376,9 +376,9 @@ packages:
   '@secretlint/resolver@8.5.0':
     resolution: {integrity: sha512-xa4eBR1UbH/dieZEdZ2+cor9mT6IYgFJWfLGEH+XqFl0EmxnIg/RUjOMV2HvZvmmA3tRjhyP1ko6CEsYaBoULQ==}
 
-  '@secretlint/secretlint-rule-preset-recommend@8.5.0':
-    resolution: {integrity: sha512-jfvCI2nbQ/k53Ffzm/dEGxV6dW8dzMRAhImZWLc3LBkIjRv3ZcMljvbjqDsrM614QF1BGMWT7D+JCBFmzcfEFA==}
-    engines: {node: ^14.13.1 || >=16.0.0}
+  '@secretlint/secretlint-rule-preset-recommend@13.0.2':
+    resolution: {integrity: sha512-D03Kw51qOgffj9zNlJFZUarVmP8zGcCZNi7A14+vZtHskbbBPEsS/f09idb48rrlMSaRMBN29IkqfbmPyL9xtw==}
+    engines: {node: '>=22.0.0'}
 
   '@secretlint/source-creator@8.5.0':
     resolution: {integrity: sha512-z0bRqWnB3sL/CbD0wAdl0bBUVJ78njN+GQ5lsvngf21Ap5Hpc4pdU1EIKys99cxTu6cCIp72J3xhPWk4UiI6UA==}
@@ -2793,7 +2793,7 @@ snapshots:
 
   '@secretlint/resolver@8.5.0': {}
 
-  '@secretlint/secretlint-rule-preset-recommend@8.5.0': {}
+  '@secretlint/secretlint-rule-preset-recommend@13.0.2': {}
 
   '@secretlint/source-creator@8.5.0':
     dependencies:
