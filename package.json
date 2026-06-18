@@ -17,7 +17,7 @@
     "lint": "pnpm run lint:secret && pnpm run lint:spell && pnpm run lint:text"
   },
   "devDependencies": {
-    "lefthook": "^1.7.0",
+    "lefthook": "^2.1.9",
     "prettier": "^3.0.0",
     "doctoc": "^2.2.0",
     "cspell": "^10.0.1",
